@@ -110,7 +110,7 @@ def getPiconName(serviceRef):
 				pngname = findPicon(series)
 	return pngname
 
-class Picon(Renderer):
+class Picon():
 	def __init__(self):
 		Renderer.__init__(self)
 		self.pngname = ""

@@ -4,7 +4,7 @@ import time
 from Tools.CList import CList
 from Components.SystemInfo import SystemInfo
 from Components.Console import Console
-from Components.Task import Job, Task, LoggingTask, PythonTask, ConditionTask
+import Components.Task
 from Tools.StbHardware import getBoxProc
 from boxbranding import getMachineMtdRoot
 import re
@@ -860,7 +860,7 @@ class HarddiskManager:
 		except Exception as ex:
 			print("[Harddisk] Failed to set %s speed to %s" % (device, speed), ex)
 
-class UnmountTask(Task.LoggingTask):
+class UnmountTask():
 	def __init__(self, job, hdd):
 		Task.LoggingTask.__init__(self, job, _("Unmount"))
 		self.hdd = hdd
@@ -888,7 +888,7 @@ class UnmountTask(Task.LoggingTask):
 			except Exception as ex:
 				print("[Harddisk] Failed to remove path '%s':" % path, ex)
 
-class MountTask(Task.LoggingTask):
+class MountTask():
 	def __init__(self, job, hdd):
 		Task.LoggingTask.__init__(self, job, _("Mount"))
 		self.hdd = hdd
@@ -922,7 +922,7 @@ class MountTask(Task.LoggingTask):
 			self.postconditions.append(Task.ReturncodePostcondition())
 
 
-class MkfsTask(Task.LoggingTask):
+class MkfsTask():
 	def prepare(self):
 		self.fsck_state = None
 	def processOutput(self, data):
